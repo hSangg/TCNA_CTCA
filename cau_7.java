@@ -5,25 +5,23 @@ import java.util.Scanner;
 
 public class cau_7 {
     public static void main(String[] args) throws FileNotFoundException {
-        // Đọc dữ liệu từ file input
+
         File inputFile = new File("input7.txt");
         Scanner scanner = new Scanner(inputFile);
 
-        int numDays = scanner.nextInt(); // Số ngày được lấy dữ liệu
+        int numDays = scanner.nextInt();
 
-        double overallTotal = 0; // Tổng nhiệt độ của toàn bộ các ngày
-        double overallMax = Double.MIN_VALUE; // Nhiệt độ cao nhất của tất cả các ngày
-        double overallMin = Double.MAX_VALUE; // Nhiệt độ thấp nhất của tất cả các ngày
+        double overallTotal = 0;
+        double overallMax = Double.MIN_VALUE;
+        double overallMin = Double.MAX_VALUE;
 
         PrintWriter writer = new PrintWriter("output.txt");
 
-        // Vòng lặp qua từng ngày
         for (int i = 0; i < numDays; i++) {
-            double dayTotal = 0; // Tổng nhiệt độ của ngày hiện tại
-            double dayMax = Double.MIN_VALUE; // Nhiệt độ cao nhất của ngày hiện tại
-            double dayMin = Double.MAX_VALUE; // Nhiệt độ thấp nhất của ngày hiện tại
+            double dayTotal = 0;
+            double dayMax = Double.MIN_VALUE;
+            double dayMin = Double.MAX_VALUE;
 
-            // Vòng lặp qua từng giờ trong ngày
             for (int j = 0; j < 12; j++) {
                 double temperature = scanner.nextDouble();
                 System.out.println("temperature: " + temperature);
@@ -47,11 +45,11 @@ public class cau_7 {
                 }
             }
 
-            double dayAverage = dayTotal / 12; // Nhiệt độ trung bình của ngày hiện tại
+            double dayAverage = dayTotal / 12;
             writer.printf("Day %d: Avg=%.1f, High=%.1f, Low=%.1f%n", i + 1, dayAverage, dayMax, dayMin);
         }
 
-        double overallAverage = overallTotal / (numDays * 12); // Nhiệt độ trung bình của toàn bộ các ngày
+        double overallAverage = overallTotal / (numDays * 12);
         writer.printf("Overall Avg=%.1f, Overall High=%.1f, Overall Low=%.1f", overallAverage, overallMax, overallMin);
         writer.close();
     }
