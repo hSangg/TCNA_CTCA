@@ -1,8 +1,4 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <title>Project Members</title>
-  </head>
   <body>
     <h1>Our Project Members</h1>
     <ul>
