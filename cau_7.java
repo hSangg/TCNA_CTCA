@@ -15,7 +15,7 @@ public class cau_7 {
         double overallMax = Double.MIN_VALUE;
         double overallMin = Double.MAX_VALUE;
 
-        PrintWriter writer = new PrintWriter("output.txt");
+        PrintWriter writer = new PrintWriter("output7.txt");
 
         for (int i = 0; i < numDays; i++) {
             double dayTotal = 0;
@@ -24,7 +24,7 @@ public class cau_7 {
 
             for (int j = 0; j < 12; j++) {
                 double temperature = scanner.nextDouble();
-                System.out.println("temperature: " + temperature);
+
                 dayTotal += temperature;
                 overallTotal += temperature;
 
