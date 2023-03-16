@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-class cau_9 {
+class cau_9_lop {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Nhap so phan tu mang: ");
