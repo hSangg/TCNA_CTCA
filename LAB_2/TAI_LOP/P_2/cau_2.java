@@ -48,30 +48,30 @@ public class cau_2 {
         double tongDoanhThuNgoaiThanh = 0;
 
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhập số lượng chuyến xe: ");
+        System.out.print("Nhap so luong chuyen xe: ");
         int n = sc.nextInt();
         sc.nextLine();
 
         for (int i = 0; i < n; i++) {
-            System.out.println("Nhập thông tin chuyến xe thứ " + (i + 1));
-            System.out.print("Nhập 1 nếu là chuyến nội thành, 2 nếu là chuyến ngoại thành: ");
+            System.out.println("Nhap thong tin chuyen xe thu " + (i + 1));
+            System.out.print("Nhap 1 neu la chuyen noi thanh, 2 neu la chuyen ngoai thanh: ");
             int loaiChuyen = sc.nextInt();
             sc.nextLine();
 
-            System.out.print("Mã số chuyến: ");
+            System.out.print("Ma so chuyen: ");
             String maSoChuyen = sc.nextLine();
-            System.out.print("Họ tên tài xế: ");
+            System.out.print("Ho ten tai xe: ");
             String hoTenTaiXe = sc.nextLine();
-            System.out.print("Số xe: ");
+            System.out.print("So xe: ");
             String soXe = sc.nextLine();
-            System.out.print("Khối lượng hàng hóa: ");
+            System.out.print("Khoi luong hang hoa: ");
             double khoiLuongHangHoa = sc.nextDouble();
             System.out.print("Doanh thu: ");
             double doanhThu = sc.nextDouble();
             sc.nextLine();
 
             if (loaiChuyen == 1) {
-                System.out.print("Quãng đường đi: ");
+                System.out.print("Quang duong di: ");
                 double quangDuongDi = sc.nextDouble();
                 sc.nextLine();
                 ChuyenNoiThanh chuyenNoiThanh = new ChuyenNoiThanh(maSoChuyen, hoTenTaiXe, soXe, khoiLuongHangHoa,
@@ -79,9 +79,9 @@ public class cau_2 {
                 dsChuyenXe.add(chuyenNoiThanh);
                 tongDoanhThuNoiThanh += doanhThu;
             } else {
-                System.out.print("Nơi đến: ");
+                System.out.print("Noi den: ");
                 String noiDen = sc.nextLine();
-                System.out.print("Số ngày vận chuyển: ");
+                System.out.print("So ngay van chuyen: ");
                 int soNgayVanChuyen = sc.nextInt();
                 sc.nextLine();
                 ChuyenNgoaiThanh chuyenNgoaiThanh = new ChuyenNgoaiThanh(maSoChuyen, hoTenTaiXe, soXe, khoiLuongHangHoa,
@@ -91,8 +91,8 @@ public class cau_2 {
             }
         }
 
-        System.out.println("Tổng doanh thu chuyến nội thành: " + tongDoanhThuNoiThanh);
-        System.out.println("Tổng doanh thu chuyến ngoại thành: " + tongDoanhThuNgoaiThanh);
+        System.out.println("Tong doanh thu chuyen noi thanh: " + tongDoanhThuNoiThanh);
+        System.out.println("Tong doanh thu chuyen ngoai thanh: " + tongDoanhThuNgoaiThanh);
 
         double maxNoiThanh = 0;
         ChuyenNoiThanh chuyenNoiThanhMax = null;
@@ -114,25 +114,26 @@ public class cau_2 {
         }
 
         if (chuyenNoiThanhMax != null) {
-            System.out.println("Thông tin chuyến xe nội thành có doanh thu cao nhất: ");
-            System.out.println("Mã số chuyến: " + chuyenNoiThanhMax.maSoChuyen);
-            System.out.println("Họ tên tài xế: " + chuyenNoiThanhMax.hoTenTaiXe);
-            System.out.println("Số xe: " + chuyenNoiThanhMax.soXe);
-            System.out.println("Khối lượng hàng hóa: " + chuyenNoiThanhMax.khoiLuongHangHoa);
-            System.out.println("Quãng đường đi: " + chuyenNoiThanhMax.quangDuongDi);
+            System.out.println("Thong tin chuyen xe noi thanh co doanh thu cao nhat: ");
+            System.out.println("Ma so chuyen: " + chuyenNoiThanhMax.maSoChuyen);
+            System.out.println("Ho ten tai xe: " + chuyenNoiThanhMax.hoTenTaiXe);
+            System.out.println("So xe: " + chuyenNoiThanhMax.soXe);
+            System.out.println("Khoi luong hang hoa: " + chuyenNoiThanhMax.khoiLuongHangHoa);
+            System.out.println("Quang duong di: " + chuyenNoiThanhMax.quangDuongDi);
             System.out.println("Doanh thu: " + chuyenNoiThanhMax.doanhThu);
         }
 
         if (chuyenNgoaiThanhMax != null) {
-            System.out.println("Thông tin chuyến xe ngoại thành có doanh thu cao nhất: ");
-            System.out.println("Mã số chuyến: " + chuyenNgoaiThanhMax.maSoChuyen);
-            System.out.println("Họ tên tài xế: " + chuyenNgoaiThanhMax.hoTenTaiXe);
-            System.out.println("Số xe: " + chuyenNgoaiThanhMax.soXe);
-            System.out.println("Khối lượng hàng hóa: " + chuyenNgoaiThanhMax.khoiLuongHangHoa);
-            System.out.println("Nơi đến: " + chuyenNgoaiThanhMax.noiDen);
-            System.out.println("Số ngày vận chuyển: " + chuyenNgoaiThanhMax.soNgayVanChuyen);
+            System.out.println("Thong tin chuyen xe ngoai thanh co doanh thu cao nhat: ");
+            System.out.println("Ma so chuyen: " + chuyenNgoaiThanhMax.maSoChuyen);
+            System.out.println("Ho ten tai xe: " + chuyenNgoaiThanhMax.hoTenTaiXe);
+            System.out.println("So xe: " + chuyenNgoaiThanhMax.soXe);
+            System.out.println("Khoi luong hang hoa: " + chuyenNgoaiThanhMax.khoiLuongHangHoa);
+            System.out.println("Noi den: " + chuyenNgoaiThanhMax.noiDen);
+            System.out.println("So ngay van chuyen: " + chuyenNgoaiThanhMax.soNgayVanChuyen);
             System.out.println("Doanh thu: " + chuyenNgoaiThanhMax.doanhThu);
         }
+
     }
 
 }
