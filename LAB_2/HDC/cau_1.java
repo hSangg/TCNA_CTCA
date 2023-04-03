@@ -1,6 +1,4 @@
-package cau1_java;
-
-public class TaiKhoan {
+ class TaiKhoan {
     private long soTK;
     private String tenTK;
     private double soTien;
@@ -31,3 +29,13 @@ public class TaiKhoan {
         return true;
     }
 }
+ public class cau_1 {
+     public static void main(String[] args) {
+         TaiKhoan t =new TaiKhoan(1,"2",3);
+         TaiKhoan t1=new TaiKhoan(4,"5",6);
+
+         t.chuyenKhoan(t1,2);
+         t.inTaikhoan();
+         t1.inTaikhoan();
+     }
+ }
