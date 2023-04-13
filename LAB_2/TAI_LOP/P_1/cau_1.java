@@ -1,4 +1,3 @@
-package LAB_2.TAI_LOP.P_1;
 
 class Point {
     public int x;
