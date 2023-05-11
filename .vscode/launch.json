@@ -1,0 +1,217 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "cau_1",
+            "request": "launch",
+            "mainClass": "HDC.cau_1",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_2",
+            "request": "launch",
+            "mainClass": "HDC.cau_2",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_1(1)",
+            "request": "launch",
+            "mainClass": "LAB_3.cau_1",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_2(1)",
+            "request": "launch",
+            "mainClass": "LAB_3.cau_2",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_3",
+            "request": "launch",
+            "mainClass": "LAB_3.cau_3",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_4",
+            "request": "launch",
+            "mainClass": "LAB_3.cau_4",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_5",
+            "request": "launch",
+            "mainClass": "LAB_3.cau_5",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_6",
+            "request": "launch",
+            "mainClass": "LAB_3.cau_6",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_1(2)",
+            "request": "launch",
+            "mainClass": "TAI_LOP.P_1.cau_1",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_2(2)",
+            "request": "launch",
+            "mainClass": "TAI_LOP.P_1.cau_2",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_3(1)",
+            "request": "launch",
+            "mainClass": "TAI_LOP.P_1.cau_3",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_4(1)",
+            "request": "launch",
+            "mainClass": "TAI_LOP.P_1.cau_4",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_1(3)",
+            "request": "launch",
+            "mainClass": "TAI_LOP.P_2.cau_1",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_2(3)",
+            "request": "launch",
+            "mainClass": "TAI_LOP.P_2.cau_2",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_3(2)",
+            "request": "launch",
+            "mainClass": "TAI_LOP.P_2.cau_3",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_4(2)",
+            "request": "launch",
+            "mainClass": "TAI_LOP.P_2.cau_4",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_1(4)",
+            "request": "launch",
+            "mainClass": "VE_NHA.cau_1",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_2(4)",
+            "request": "launch",
+            "mainClass": "VE_NHA.cau_2",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_1(5)",
+            "request": "launch",
+            "mainClass": "cau_1",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_1_cau_2",
+            "request": "launch",
+            "mainClass": "cau_1_cau_2",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_2(5)",
+            "request": "launch",
+            "mainClass": "cau_2",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_3(3)",
+            "request": "launch",
+            "mainClass": "cau_3",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_4(3)",
+            "request": "launch",
+            "mainClass": "cau_4",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_5(1)",
+            "request": "launch",
+            "mainClass": "cau_5",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_6(1)",
+            "request": "launch",
+            "mainClass": "cau_6",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_7",
+            "request": "launch",
+            "mainClass": "cau_7",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_8",
+            "request": "launch",
+            "mainClass": "cau_8",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_9_lop",
+            "request": "launch",
+            "mainClass": "cau_9_lop",
+            "projectName": "java_fun_44ef41f5"
+        },
+        {
+            "type": "java",
+            "name": "cau_9_venha",
+            "request": "launch",
+            "mainClass": "cau_9_venha",
+            "projectName": "java_fun_44ef41f5"
+        }
+    ]
+}
