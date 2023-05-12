@@ -1,15 +1,17 @@
-
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JTable;
-import javax.swing.JButton;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.util.IllegalFormatException;
+import java.util.Vector;
 
 class Sach {
     private final String maSach;
@@ -203,14 +205,104 @@ public class App {
         lblNewLabel_1_1.setBounds(332, 71, 107, 14);
         frame.getContentPane().add(lblNewLabel_1_1);
 
+
+        JButton btnNewButton = new JButton("Thêm");
+        btnNewButton.setBounds(10, 399, 89, 23);
+
+
         textField_1 = new JTextField();
         textField_1.setColumns(10);
         textField_1.setBounds(433, 69, 155, 20);
         frame.getContentPane().add(textField_1);
 
-        table = new JTable();
-        table.setBounds(69, 188, 543, 185);
-        frame.getContentPane().add(table);
+        DefaultTableModel model=new DefaultTableModel();
+        table = new JTable(model);
+        model.addColumn("Mã sách");
+        model.addColumn("Tên sách");
+        model.addColumn("Nhà xuất bản");
+        model.addColumn("Tác giả");
+        model.addColumn("Giá");
+        Vector<Vector<String>> data=new Vector<>();
+        JScrollPane j=new JScrollPane(table);
+        j.setBounds(69, 188, 543, 185);
+        frame.getContentPane().add(j);
+        btnNewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Vector<String> data1 = new Vector<>();
+                    data1.add(textField.getText());
+                    data1.add(textField_1.getText());
+                    data1.add(textField_2.getText());
+                    data1.add(textField_3.getText());
+                    data1.add(textField_4.getText());
+                    for (int i = 0; i < 5; i++) {
+                        if (data1.get(i).isEmpty()) {
+                            Exception NumberFormatException = new Exception("chua nhap du thong tin");
+                            JOptionPane.showMessageDialog(frame, "Chưa nhập đử thông tin.", "Error", JOptionPane.ERROR_MESSAGE);
+                            throw NumberFormatException;
+                        }
+                    }
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+                for(int i=0;i<data.size();i++){
+                        if(data.get(i).get(0).equals(data1.get(0))){
+                            Exception IllegalStateException = new Exception("Trung ma so");
+                            JOptionPane.showMessageDialog(frame, "Trung ma so", "Error", JOptionPane.ERROR_MESSAGE);
+                            throw IllegalStateException;
+                        }
+                }
+
+                for(int i=0;i<data1.get(4).length();i++){
+                    char c=data1.get(4).charAt(i);
+                    if((int)c<48 || (int)c>57){
+                        Exception IllegalFormatException = new Exception("nhap sai gia");
+                        JOptionPane.showMessageDialog(frame, "Gia phai la so", "Error", JOptionPane.ERROR_MESSAGE);
+                        throw IllegalFormatException;
+                    }
+                }
+
+                model.addRow(data1);
+                data.add(data1);
+                    System.out.println(data);
+            }
+                catch (IllegalFormatException ex0){
+                    System.out.println("Nhap lai");
+                }
+                catch (IllegalStateException ex1){
+                    System.out.println("Nhap lai");
+                }
+                catch (NumberFormatException ex2){
+                    System.out.println("nhap lai");
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        //- Khi chọn một dòng trên bảng thì sẽ hiện thông tin sách lên các ô nhập liệu
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting()) {
+                    int selectedRow = table.getSelectedRow();
+                    if (selectedRow != -1) {
+                        String Masach=table.getValueAt(selectedRow,0).toString();
+                        String Tensach=table.getValueAt(selectedRow,1).toString();
+                        String Nxb=table.getValueAt(selectedRow,2).toString();
+                        String Tacgia=table.getValueAt(selectedRow,3).toString();
+                        String Gia=table.getValueAt(selectedRow,4).toString();
+
+                        // Hiển thị thông tin sách lên các ô nhập liệu
+                      textField.setText(Masach);
+                      textField_1.setText(Tensach);
+                        textField_2.setText(Nxb);
+                        textField_3.setText(Tacgia);
+                        textField_4.setText(Gia);
+                    }
+                }
+            }
+        });
+
 
         JLabel lblNewLabel_1_2 = new JLabel("Tên sách");
         lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -242,17 +334,41 @@ public class App {
         textField_4.setBounds(149, 124, 155, 20);
         frame.getContentPane().add(textField_4);
 
-        JButton btnNewButton = new JButton("Thêm");
-        btnNewButton.setBounds(10, 399, 89, 23);
+
         frame.getContentPane().add(btnNewButton);
 
         JButton btnXa = new JButton("Xóa");
-        btnXa.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
         btnXa.setBounds(104, 399, 89, 23);
         frame.getContentPane().add(btnXa);
+        btnXa.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+
+                    int selectedRow = table.getSelectedRow();
+                    if (selectedRow != -1) {
+                        if (table.isRowSelected(selectedRow)) {
+                            int result = JOptionPane.showConfirmDialog(null, "Co chac chan la muon xoa");
+                            if (result == JOptionPane.YES_OPTION) {
+                                model.removeRow(selectedRow);
+                                data.remove(selectedRow);
+                            }
+                        }
+                    }
+                    else {
+                            String Masach = textField.getText();
+                           for(int i=0;i<data.size();i++){
+                               if(data.get(i).get(0).equals(Masach)){
+                                   model.removeRow(i);
+                                   data.remove(i);
+                               }
+                           }
+
+                        }
+                    }
+
+
+        });
+
 
         JButton btnSa = new JButton("Sửa");
         btnSa.setBounds(199, 399, 89, 23);
@@ -265,6 +381,21 @@ public class App {
         JButton btnTm = new JButton("Tìm");
         btnTm.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                int flag=0;
+                String Masach = textField.getText();
+                for(int i=0;i<data.size();i++){
+                    if(data.get(i).get(0).equals(Masach)){
+                        textField.setText(Masach);
+                        textField_1.setText(data.get(i).get(1));
+                        textField_2.setText(data.get(i).get(2));
+                        textField_3.setText(data.get(i).get(3));
+                        textField_4.setText(data.get(i).get(4));
+                        flag++;
+                    }
+                }
+                if(flag==0) {
+                    JOptionPane.showMessageDialog(frame, "Khong tim thay", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         btnTm.setBounds(398, 399, 89, 23);
