@@ -8,7 +8,138 @@ import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+
+class Sach {
+    private final String maSach;
+    private String tenSach;
+    private String tacGia;
+    private String nhaXuatBan;
+    private double gia;
+
+    public Sach(String maSach, String tenSach, String tacGia, String nhaXuatBan, double gia) {
+        this.maSach = maSach;
+        this.tenSach = tenSach;
+        this.tacGia = tacGia;
+        this.nhaXuatBan = nhaXuatBan;
+        this.gia = gia;
+    }
+
+    public String getMaSach() {
+        return maSach;
+    }
+
+    public String getTenSach() {
+        return tenSach;
+    }
+
+    public void setTenSach(String tenSach) {
+        this.tenSach = tenSach;
+    }
+
+    public String getTacGia() {
+        return tacGia;
+    }
+
+    public void setTacGia(String tacGia) {
+        this.tacGia = tacGia;
+    }
+
+    public String getNhaXuatBan() {
+        return nhaXuatBan;
+    }
+
+    public void setNhaXuatBan(String nhaXuatBan) {
+        this.nhaXuatBan = nhaXuatBan;
+    }
+
+    public double getGia() {
+        return gia;
+    }
+
+    public void setGia(double gia) {
+        this.gia = gia;
+    }
+
+    @Override
+    public String toString() {
+        return "Mã sách: " + maSach +
+                "\nTên sách: " + tenSach +
+                "\nTác giả: " + tacGia +
+                "\nNhà xuất bản: " + nhaXuatBan +
+                "\nGiá: " + gia;
+    }
+}
+
+class DSSach {
+    private ArrayList<Sach> danhSachSach;
+
+    public DSSach() {
+        danhSachSach = new ArrayList<>();
+    }
+
+    public void themSach(Sach sach) {
+
+        for (Sach s : danhSachSach) {
+            if (s.getMaSach().equals(sach.getMaSach())) {
+                System.out.println("Mã sách đã tồn tại. Không thể thêm sách.");
+                return;
+            }
+        }
+        danhSachSach.add(sach);
+        System.out.println("Thêm sách thành công.");
+    }
+
+    public Sach layThongTinSach(int viTri) {
+        if (viTri >= 0 && viTri < danhSachSach.size()) {
+            return danhSachSach.get(viTri);
+        } else {
+            System.out.println("Vị trí không hợp lệ.");
+            return null;
+        }
+    }
+
+    public void xoaSach(String maSach) {
+        for (Sach sach : danhSachSach) {
+            if (sach.getMaSach().equals(maSach)) {
+                danhSachSach.remove(sach);
+                System.out.println("Xóa sách thành công.");
+                return;
+            }
+        }
+        System.out.println("Không tìm thấy sách với mã sách đã cho.");
+    }
+
+    public void timSach(String maSach) {
+        for (Sach sach : danhSachSach) {
+            if (sach.getMaSach().equals(maSach)) {
+                System.out.println(sach.toString());
+                return;
+            }
+        }
+        System.out.println("Không tìm thấy sách với mã sách đã cho.");
+    }
+
+    public void capNhatThongTinSach(String maSach, String tenSach, String tacGia, String nhaXuatBan, double gia) {
+        for (Sach sach : danhSachSach) {
+            if (sach.getMaSach().equals(maSach)) {
+                sach.setTenSach(tenSach);
+                sach.setTacGia(tacGia);
+                sach.setNhaXuatBan(nhaXuatBan);
+                sach.setGia(gia);
+                System.out.println("Cập nhật thông tin sách thành công.");
+                return;
+            }
+        }
+        System.out.println("Không tìm thấy sách với mã sách đã cho.");
+    }
+
+    public int tongSoSach() {
+        return danhSachSach.size();
+    }
+
+}
 
 public class App {
 
