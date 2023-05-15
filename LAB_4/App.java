@@ -222,6 +222,7 @@ public class App {
         model.addColumn("Nhà xuất bản");
         model.addColumn("Tác giả");
         model.addColumn("Giá");
+        DSSach ds=new DSSach();
         Vector<Vector<String>> data=new Vector<>();
         JScrollPane j=new JScrollPane(table);
         j.setBounds(69, 188, 543, 185);
@@ -230,12 +231,14 @@ public class App {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+
                     Vector<String> data1 = new Vector<>();
                     data1.add(textField.getText());
                     data1.add(textField_1.getText());
                     data1.add(textField_2.getText());
                     data1.add(textField_3.getText());
                     data1.add(textField_4.getText());
+                    Sach sach=new Sach(data1.get(0),data1.get(1),data1.get(2),data1.get(3),Double.parseDouble(data1.get(4)));
                     for (int i = 0; i < 5; i++) {
                         if (data1.get(i).isEmpty()) {
                             Exception NumberFormatException = new Exception("chua nhap du thong tin");
@@ -264,6 +267,7 @@ public class App {
 
                 model.addRow(data1);
                 data.add(data1);
+                ds.themSach(sach);
                     System.out.println(data);
             }
                 catch (IllegalFormatException ex0){
@@ -349,8 +353,10 @@ public class App {
                         if (table.isRowSelected(selectedRow)) {
                             int result = JOptionPane.showConfirmDialog(null, "Co chac chan la muon xoa");
                             if (result == JOptionPane.YES_OPTION) {
+                               ds.xoaSach(model.getValueAt(selectedRow,0).toString());
                                 model.removeRow(selectedRow);
                                 data.remove(selectedRow);
+
                             }
                         }
                     }
@@ -358,6 +364,7 @@ public class App {
                             String Masach = textField.getText();
                            for(int i=0;i<data.size();i++){
                                if(data.get(i).get(0).equals(Masach)){
+                                   ds.xoaSach(model.getValueAt(i,0).toString());
                                    model.removeRow(i);
                                    data.remove(i);
                                }
