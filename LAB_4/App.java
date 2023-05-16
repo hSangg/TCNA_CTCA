@@ -2,6 +2,11 @@ import java.awt.EventQueue;
 
 import javax.swing.*;
 import java.awt.Font;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -131,6 +136,7 @@ class DSSach {
                 sach.setNhaXuatBan(nhaXuatBan);
                 sach.setGia(gia);
                 System.out.println("Cập nhật thông tin sách thành công.");
+                System.out.println(sach);
                 return;
             }
         }
@@ -222,6 +228,7 @@ public class App {
         model.addColumn("Nhà xuất bản");
         model.addColumn("Tác giả");
         model.addColumn("Giá");
+        DSSach ds=new DSSach();
         Vector<Vector<String>> data=new Vector<>();
         JScrollPane j=new JScrollPane(table);
         j.setBounds(69, 188, 543, 185);
@@ -230,12 +237,14 @@ public class App {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+
                     Vector<String> data1 = new Vector<>();
                     data1.add(textField.getText());
-                    data1.add(textField_1.getText());
                     data1.add(textField_2.getText());
                     data1.add(textField_3.getText());
+                    data1.add(textField_1.getText());
                     data1.add(textField_4.getText());
+                    Sach sach=new Sach(textField.getText(),textField_2.getText(),textField_1.getText(),textField_3.getText(),Double.parseDouble(textField_4.getText()));
                     for (int i = 0; i < 5; i++) {
                         if (data1.get(i).isEmpty()) {
                             Exception NumberFormatException = new Exception("chua nhap du thong tin");
@@ -261,10 +270,11 @@ public class App {
                         throw IllegalFormatException;
                     }
                 }
-
+                System.out.print(sach.getTacGia());
                 model.addRow(data1);
                 data.add(data1);
-                    System.out.println(data);
+                ds.themSach(sach);
+                    System.out.println(sach);
             }
                 catch (IllegalFormatException ex0){
                     System.out.println("Nhap lai");
@@ -294,11 +304,12 @@ public class App {
 
                         // Hiển thị thông tin sách lên các ô nhập liệu
                       textField.setText(Masach);
-                      textField_1.setText(Tensach);
-                        textField_2.setText(Nxb);
-                        textField_3.setText(Tacgia);
+                      textField_1.setText(Tacgia);
+                        textField_2.setText(Tensach);
+                        textField_3.setText(Nxb);
                         textField_4.setText(Gia);
                     }
+                    textField.setEditable(false);
                 }
             }
         });
@@ -349,8 +360,10 @@ public class App {
                         if (table.isRowSelected(selectedRow)) {
                             int result = JOptionPane.showConfirmDialog(null, "Co chac chan la muon xoa");
                             if (result == JOptionPane.YES_OPTION) {
+                               ds.xoaSach(model.getValueAt(selectedRow,0).toString());
                                 model.removeRow(selectedRow);
                                 data.remove(selectedRow);
+                                textField.setEditable(true);
                             }
                         }
                     }
@@ -358,14 +371,16 @@ public class App {
                             String Masach = textField.getText();
                            for(int i=0;i<data.size();i++){
                                if(data.get(i).get(0).equals(Masach)){
+                                   ds.xoaSach(model.getValueAt(i,0).toString());
                                    model.removeRow(i);
                                    data.remove(i);
                                }
                            }
 
                         }
+                        textField.setEditable(true);
                     }
-
+            
 
         });
 
@@ -373,10 +388,78 @@ public class App {
         JButton btnSa = new JButton("Sửa");
         btnSa.setBounds(199, 399, 89, 23);
         frame.getContentPane().add(btnSa);
-
+        btnSa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!textField.isEditable()) {
+                    String MaSach = textField.getText();
+                    String TenSach = textField_2.getText();
+                    String Nxb = textField_3.getText();
+                    String TacGia = textField_1.getText();
+                    String Giatext = textField_4.getText();
+        
+                    if (MaSach.isEmpty() || TenSach.isEmpty() || Nxb.isEmpty() || TacGia.isEmpty() || Giatext.isEmpty()) {
+                        String errorMessage = "Vui lòng điền đầy đủ thông tin";
+                        JOptionPane.showMessageDialog(null, errorMessage, "Lỗi", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+        
+                    try {
+                        Double Gia = Double.parseDouble(Giatext);
+                        int result = JOptionPane.showConfirmDialog(frame, "Bạn có chắc chắn muốn sửa thông tin sách?", "Xác nhận sửa", JOptionPane.YES_NO_OPTION);
+                        if (result == JOptionPane.YES_OPTION) {
+                            ds.capNhatThongTinSach(MaSach, TenSach, TacGia, Nxb, Gia);
+                            
+                            for (int i = 0; i < data.size(); i++) {
+                                if (data.get(i).get(0).equals(MaSach)) {
+                                    data.get(i).set(1, TenSach);
+                                    data.get(i).set(2, Nxb);
+                                    data.get(i).set(3, TacGia);
+                                    data.get(i).set(4, Giatext);
+                                }
+                            }
+                        }
+                        model.fireTableChanged(null);
+                        textField.setEditable(true);
+                    } catch (NumberFormatException ex) {
+                        String errorMessage = "Vui lòng nhập giá là số thực";
+                        JOptionPane.showMessageDialog(null, errorMessage, "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    String errorMessage = "Vui lòng chọn hoặc tìm một sách trước khi sửa";
+                    JOptionPane.showMessageDialog(null, errorMessage, "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
         JButton btnLu = new JButton("Lưu");
         btnLu.setBounds(299, 399, 89, 23);
         frame.getContentPane().add(btnLu);
+        btnLu.addActionListener(e -> {
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("saves.txt"));
+    
+                for (Vector<String> row : data) {
+                    StringBuilder lineBuilder = new StringBuilder();
+    
+                    for (String column : row) {
+                        lineBuilder.append(column).append(",");
+                    }
+    
+                    // Xóa dấu phẩy cuối cùng
+                    if (lineBuilder.length() > 0) {
+                        lineBuilder.deleteCharAt(lineBuilder.length() - 1);
+                    }
+    
+                    writer.write(lineBuilder.toString());
+                    writer.newLine();
+                }
+    
+                writer.close();
+            } catch (IOException y) {
+                y.printStackTrace();
+            }
+        });
+        
 
         JButton btnTm = new JButton("Tìm");
         btnTm.addActionListener(new ActionListener() {
@@ -386,11 +469,12 @@ public class App {
                 for(int i=0;i<data.size();i++){
                     if(data.get(i).get(0).equals(Masach)){
                         textField.setText(Masach);
-                        textField_1.setText(data.get(i).get(1));
-                        textField_2.setText(data.get(i).get(2));
-                        textField_3.setText(data.get(i).get(3));
+                        textField_1.setText(data.get(i).get(3));
+                        textField_2.setText(data.get(i).get(1));
+                        textField_3.setText(data.get(i).get(2));
                         textField_4.setText(data.get(i).get(4));
                         flag++;
+                        textField.setEditable(false);
                     }
                 }
                 if(flag==0) {
@@ -404,9 +488,61 @@ public class App {
         JButton btnClear = new JButton("Clear");
         btnClear.setBounds(487, 399, 89, 23);
         frame.getContentPane().add(btnClear);
-
+        btnClear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textField.setText(null);
+                textField_1.setText(null);
+                textField_2.setText(null);
+                textField_3.setText(null);
+                textField_4.setText(null);
+            }
+            
+        });;
         JButton btnThot = new JButton("Thoát");
         btnThot.setBounds(586, 399, 89, 23);
         frame.getContentPane().add(btnThot);
+        btnThot.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("saves.txt"));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] columns = line.split(",");
+
+                Vector<String> row = new Vector<>();
+
+                for (String column : columns) {
+                    row.add(column);
+                }
+
+                data.add(row);
+                model.addRow(row);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (Vector<String> row : data) {
+            for (String column : row) {
+                System.out.print(column + "\t");
+            }
+            System.out.println();
+        }
+        for (Vector<String> row : data) {
+            String maSach = row.get(0);
+            String tenSach = row.get(1);
+            String tacGia = row.get(2);
+            String nhaXuatBan = row.get(3);
+            double gia = Double.parseDouble(row.get(4));
+        
+            Sach sach = new Sach(maSach, tenSach, tacGia, nhaXuatBan, gia);
+            ds.themSach(sach); 
+        }
     }
 }
